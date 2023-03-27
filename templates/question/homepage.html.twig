@@ -9,9 +9,11 @@
 </div>
 <div class="container">
     <div class="row mb-3">
-        <div class="col">
-            <button class="btn btn-question">Ask a Question</button>
-        </div>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div class="col">
+                <a href="{{ path('app_ask_question') }}" class="btn btn-question">Ask a Question</a>
+            </div>
+        {% endif %}
     </div>
     <div class="row">
         <div class="col-12">
