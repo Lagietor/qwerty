@@ -38,6 +38,16 @@ class QuestionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    public function findById(int $id)
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneorNullResult()
+        ;
+    }
 
 //    /**
 //     * @return Question[] Returns an array of Question objects
@@ -54,13 +64,4 @@ class QuestionRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Question
-//    {
-//        return $this->createQueryBuilder('q')
-//            ->andWhere('q.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

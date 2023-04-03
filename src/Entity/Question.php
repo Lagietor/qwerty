@@ -17,13 +17,16 @@ class Question
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    private ?User $user = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $message = null;
+    private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'question_id', targetEntity: Comment::class)]
     private Collection $comments;
+
+    #[ORM\Column(length: 255)]
+    private ?string $question = null;
 
     public function __construct()
     {
@@ -37,24 +40,24 @@ class Question
 
     public function getUserId(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUserId(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getMessage(): ?string
+    public function getdescription(): ?string
     {
-        return $this->message;
+        return $this->description;
     }
 
-    public function setMessage(string $message): self
+    public function setdescription(string $description): self
     {
-        $this->message = $message;
+        $this->description = $description;
 
         return $this;
     }
@@ -85,6 +88,18 @@ class Question
                 $comment->setQuestionId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getquestion(): ?string
+    {
+        return $this->question;
+    }
+
+    public function setquestion(string $question): self
+    {
+        $this->question = $question;
 
         return $this;
     }
