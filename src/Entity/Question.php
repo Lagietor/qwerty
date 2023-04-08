@@ -22,7 +22,7 @@ class Question
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'question_id', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Comment::class)]
     private Collection $comments;
 
     #[ORM\Column(length: 255)]
@@ -38,24 +38,24 @@ class Question
         return $this->id;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUserId(?User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getdescription(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setdescription(string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -74,7 +74,7 @@ class Question
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setQuestionId($this);
+            $comment->setQuestion($this);
         }
 
         return $this;
@@ -84,20 +84,20 @@ class Question
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getQuestionId() === $this) {
-                $comment->setQuestionId(null);
+            if ($comment->getQuestion() === $this) {
+                $comment->setQuestion(null);
             }
         }
 
         return $this;
     }
 
-    public function getquestion(): ?string
+    public function getQuestion(): ?string
     {
         return $this->question;
     }
 
-    public function setquestion(string $question): self
+    public function setQuestion(string $question): self
     {
         $this->question = $question;
 

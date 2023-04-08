@@ -15,10 +15,10 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Question $question_id = null;
+    private ?Question $question = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    private ?User $user_id = null;
+    private ?User $user = null;
 
     #[ORM\Column(length: 255)]
     private ?string $message = null;
@@ -28,26 +28,26 @@ class Comment
         return $this->id;
     }
 
-    public function getQuestionId(): ?Question
+    public function getQuestion(): ?Question
     {
-        return $this->question_id;
+        return $this->question;
     }
 
-    public function setQuestionId(?Question $question_id): self
+    public function setQuestion(?Question $question): self
     {
-        $this->question_id = $question_id;
+        $this->question = $question;
 
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }

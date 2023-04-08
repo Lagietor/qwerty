@@ -22,7 +22,7 @@ class AskQuestionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $question = $form->getData();
-            $question->setUserId($this->getUser());
+            $question->setUser($this->getUser());
 
             $entityManager->persist($question);
             $entityManager->flush();

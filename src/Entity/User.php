@@ -32,10 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Question::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Question::class)]
     private Collection $questions;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private Collection $comments;
 
     private $roles = [];
@@ -99,7 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->questions->contains($question)) {
             $this->questions->add($question);
-            $question->setUserId($this);
+            $question->setUser($this);
         }
 
         return $this;
@@ -109,8 +109,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->questions->removeElement($question)) {
             // set the owning side to null (unless already changed)
-            if ($question->getUserId() === $this) {
-                $question->setUserId(null);
+            if ($question->getUser() === $this) {
+                $question->setUser(null);
             }
         }
 
@@ -129,7 +129,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setUserId($this);
+            $comment->setUser($this);
         }
 
         return $this;
@@ -139,8 +139,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getUserId() === $this) {
-                $comment->setUserId(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
 
