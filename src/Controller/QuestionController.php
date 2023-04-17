@@ -32,7 +32,7 @@ class QuestionController extends AbstractController
     public function show($slug, EntityManagerInterface $entityManager, Request $request)
     {
         $repository = $entityManager->getRepository(Question::class);
-        $question = $repository->findById($slug);
+        $question = $repository->find($slug);
 
         $comments = $question->getComments();
 

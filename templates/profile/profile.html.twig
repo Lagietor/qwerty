@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="bg-light mt-4 p-4">
+    {{ form_start(form) }}
+        <div class="m-5"> 
+            <div class="mt-3 pb-4 d-flex justify-content-between">
+                <img src='{{ asset(app.user.image) }}' class="rounded-circle" width="150" height="150" alt="Tisha avatar">
+                <div class="pt-5">
+                    <h5 class="font-weight-bold"> Change your profile image </h5>
+                    {{ form_widget(form.image) }}
+                </div>
+            </div>
+            <hr>
+            <div class="mt-5">
+                <div class="d-flex justify-content-between">
+                    <h4 class="font-weight-bold"> {{ app.user.login }} </h4>
+                    <h4 class="font-weight-bold"> {{ app.user.email }} </h4>
+                </div>
+                <h5 class="pt-4"> Change your login </h5>
+                {{ form_widget(form.login) }}
+            </div>
+            <div class="mt-3">
+                {{ form_widget(form.Save) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+    </div>
+</div>
+
+{% endblock %}

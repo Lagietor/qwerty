@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Qwerty{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -16,6 +16,18 @@
                     <i style="color: #444; font-size: 2rem;" class="pb-1 fad fa-cauldron"></i>
                     <p class="pl-2 d-inline font-weight-bold" style="color: #444;">Qwerty</p>
                 </a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div class="border-left border-secondary ml-3">
+                        <div class="pl-5">
+                            <a href="{{ path('app_profile', { slug: app.user.id }) }}" class="text-decoration-none text-dark font-weight-bold row">
+                                <img src="{{ asset(app.user.image) }}" class="rounded-circle" width="55" height="55" alt="Tisha avatar">
+                                <div class="ml-3 pt-3">
+                                    {{ app.user.login }}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-collapsable">
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a class="nav-link text-black-50" href="{{ path('app_login') }}"> Login </a>

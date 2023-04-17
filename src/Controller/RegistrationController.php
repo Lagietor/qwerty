@@ -29,10 +29,10 @@ class RegistrationController extends AbstractController
             );
             $user->setEmail($form->get('email')->getData());
             $user->setLogin($form->get('login')->getData());
+            $user->setImage('/images/default.png');
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_homepage');
         }
